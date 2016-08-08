@@ -1,0 +1,95 @@
+doctype html
+html
+  head
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+   script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+   
+   script.
+    // init page data:
+    $(document).ready(function() {
+      
+      // INIT STEP 1: Get system basic data
+      $.ajax({
+        url : "/systemService/#{systemId}"
+      }).then(
+     	function success(data) {
+     	    var systemInfo = JSON.parse(data);
+     	    setSystemData(systemInfo);
+     	  }
+     	,
+     	function fail() {
+     	  addError("Järjestelmän tietojen haku epäonnistui.");
+     	}
+     );
+     
+     // INIT STEP 2: Load menu items:
+     $.ajax({
+           url : "/menuItemService/#{systemId}"
+           }).then(
+             function success(data) {
+               menuItemsSorted = JSON.parse(data);                
+             	 for(i=0;i<menuItemsSorted.length;i++) {
+             	   addMenuItem(menuItemsSorted[i]);
+             	 }             	
+             }
+             ,
+             function fail() {
+               addError("Valikon haku epäonnistui.");
+             }
+           );
+    
+    });
+    
+    function addError(errorText) {
+      var before = $("#errorText").html();
+      $("#errorText").html(before + " <i>" + errorText +"</i>");
+    }
+    
+    function setSystemData(systemInfo) {
+    	$("#systemName").text(systemInfo.name);
+    	$("#systemNotes").text(systemInfo.notes);
+    }
+    
+    function addMenuItem(menuItem) {
+      var itemElem = document.createElement('div');
+      var identations ='';
+      for(var j=0;j<menuItem.identation;j++)
+        identations += '&nbsp;&nbsp;&nbsp;&nbsp';
+      if(menuItem.functions.length>0) {
+        a = document.createElement('a');
+        a.href = '/menu/open/' + menuItem._id;
+        a.text = menuItem.text;
+        br = document.createElement('br');
+        $("#menuItems").append(identations).append(a).append(br); 
+      } else {
+        itemElem.innerHTML = identations + menuItem.text;;
+        itemElem.setAttribute("class", 'menuItem');
+        $("#menuItems").append(itemElem);
+      }
+      
+    }
+    
+  title= title
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div.container-floating
+    div.row
+     div.col-sm-12
+      div.systemName
+       #systemName
+    hr
+    div.row
+     div.col-sm-12
+      font(color="red")
+       #errorText
+    div.row
+     div.col-sm-12 
+      div.systemNotes
+       #systemNotes
+    hr
+    div.row
+     div.col-sm-12
+      #menuItems

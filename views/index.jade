@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+   script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+   script.
+    // init page data:
+    $(document).ready(function() {
+      $.ajax({
+      url : "/systemService"
+     }).then(
+     	function success(data) {
+     	 var systemInfos = JSON.parse(data);
+     	 
+     	 for(i=0;i<systemInfos.length;i++) {
+     	  var sys = systemInfos[i];
+     	  $("#systems").append(getLinkToSystem(sys._id, sys.name));
+     	  $("#systems").append(document.createElement('br'));
+     	 }
+     	 }
+     	 ,
+     	function fail() {
+     	 addError("Tietosisällön haku epäonnistui.");
+     	}
+     );
+    
+    });
+    
+    function addError(errorText) {
+    var before = $("#errorText").html();
+     $("#errorText").html(before + " <i>" + errorText +"</i>");
+    }
+    
+    function getLinkToSystem(systemId, systemName) {
+    	a = document.createElement('a');
+    	a.href =  '/menu/' + systemId; 
+    	a.innerHTML = systemName
+        return  a;
+    }
+    
+  title= title
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   h1= pagemetadata.pagetitle
+   font(color="red")
+    #errorText
+   b Valitse sovellus
+   br
+   #systems
+   br

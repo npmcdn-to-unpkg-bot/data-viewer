@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+   script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+
+   script.
+    // init page data:
+    $(document).ready(function() {
+      var data = !{JSON.stringify(data)};
+      data.sort(function sort(a,b) {
+        return (a.ordernumber - b.ordernumber);
+      })
+      for(i=0;i<data.length;i++) {
+        addDataToContent(data[i]);
+      }
+      $("#content").html("Sivu ladattu.");
+    });
+
+    function addError(errorText) {
+      var before = $("#errorText").html();
+      $("#errorText").html(before + " <i>" + errorText +"</i>");
+    }
+
+    function addDataToContent(data) {
+      
+      if(data.text) {
+        element = document.createElement('p');
+        $("#datas").append(element);
+      } else if(data.img) {
+        element = document.createElement('img');
+        element.src = data.img.src;
+        $("#datas").append(element);
+        $("#datas").append(document.createElement('br'));
+      }
+    }
+
+  title=title
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div.container-floating
+    div.row
+     div.col-sm-12
+      font(color="red")
+       #errorText
+    div.row
+     div.col-sm-12
+     a(href="/menu/#{systemId}") << takaisin
+     br
+    div.row
+     div.col-sm-12
+     #datas
+    div.row
+     div.col-sm-12
+     a(href="/menu/#{systemId}") << takaisin
+
+
