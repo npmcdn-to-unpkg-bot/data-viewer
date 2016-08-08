@@ -2,8 +2,6 @@
 
 Web-based system to show data from web. 
 
-NOTE: you need MongoDB databse to run this system.
-
 Application menu-structure is defined into MongoDB database. Application 
 structure can have several "systems". Each system consists of hierarchical 
 menu items and functions which are linked to menuitems.
@@ -36,3 +34,12 @@ This application is implemented to test different web technologies and applicati
 uses several different technologies: NodeJs, Express, MongoDB, Mongoose, 
 JADE templates, JQuery, BootStrap, log4js logging... Application internal interfaces
 are implemented as REST services.
+
+You need MongoDB databse to run this system. Follow these instructions:
+1. Create a new MongoDB database
+2. Insert demo material into db: systems, menuitems and functions. These are dumped
+as JSON in directory /DEMO-database.
+3. Copy file ./config.json_TEMPLATE to new name: ./config.json
+4. Edit config.json and add your MongoDB database address.
+
+After configuring database you are ready to lauch server: npm start

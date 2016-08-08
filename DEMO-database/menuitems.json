@@ -1,0 +1,12 @@
+{"_id":{"$oid":"579e47e7f36d2808839abfb7"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"","text":"Säätiedot"}
+{"_id":{"$oid":"579e485ff36d2808839abfcf"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Tampere"}
+{"_id":{"$oid":"579e48aaf36d2808839abfd8"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Helsinki"}
+{"_id":{"$oid":"579e48bbf36d2808839abfdb"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Turku"}
+{"_id":{"$oid":"579e48cbf36d2808839abfdc"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Oulu"}
+{"_id":{"$oid":"579f91eef36d2808839b23be"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e485ff36d2808839abfcf","text":"Hatanpää"}
+{"_id":{"$oid":"57a723c8dcba0f71400ffebf"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"","text":"Tampereen ympäristö"}
+{"_id":{"$oid":"57a72412dcba0f71400ffec4"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 9 Suinula (Tampereelle päin)","functions":["57a7282fdcba0f71400fff37"]}
+{"_id":{"$oid":"57a72478dcba0f71400ffed3"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 3 Sasi (Tampereelle päin)","functions":["57a727d8dcba0f71400fff31","57a73b4fdcba0f7140100180"]}
+{"_id":{"$oid":"57a724acdcba0f71400ffed7"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 11 Nokia, Murhasaari (Tampereelle päin)","functions":"57a7287fdcba0f71400fff3d"}
+{"_id":{"$oid":"57a724c3dcba0f71400ffedb"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 65 Kuru (Tampereelle päin)","functions":["57a728c6dcba0f71400fff49"]}
+{"_id":{"$oid":"57a724e7dcba0f71400ffee4"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 9 Orivesi, Oritupa (Tampereelle päin)","functions":["57a72909dcba0f71400fff58"]}
