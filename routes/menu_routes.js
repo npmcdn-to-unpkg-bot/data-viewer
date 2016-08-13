@@ -23,11 +23,11 @@ router.get('/menu/open/:menuItemId', function(req, res, next) {
           }, 
         
           function failed() {
-            logger.error('Open menuitem failed.');
+            logger.error('Open menuitem failed: ' + req.params.menuItemId);
             res.render('open', {data : [], systemId : item.toObject().systemId});
           })
         .catch(function() {
-          logger.error("Open menuItem failed");
+          logger.error("Open menuItem failed: " + req.params.menuItemId);
         });
      }
   });// getMenuItemWithFunctions
