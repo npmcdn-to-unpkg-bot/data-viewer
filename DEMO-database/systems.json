@@ -1,2 +1,3 @@
 {"_id":{"$oid":"579e2ca1f36d2808839abb6a"},"name":"Demo systeemi","title":"Demo systeemi","notes":"Demosysteemi on tarkoitettu kehitysaikaiseen testailuun."}
-{"_id":{"$oid":"57a7062adcba0f71400ffb4e"},"name":"Liikennekamerat","title":"Liikennekameroita eri puolilta Tamperetta","notes":"Klikkaa nimeä niin näet kuvan."}
+{"_id":{"$oid":"57a7062adcba0f71400ffb4e"},"name":"Liikennekamerat","title":"Liikennekameroita eri puolilta Tamperetta","notes":"Kelikameroiden kuvat näytetään Liikenneviraston kelikameroista. Osassa kohteita näytetään kaksi kuvaa: ilmakuva ja kuva tien pinnasta."}
+{"_id":{"$oid":"57af4a5fdcba0f1d268f84d7"},"name":"Liikennemäärät","title":"Liikennemäärät ja keskinopeudet","notes":"Tiedot tuotetaan liikenneviraston palvelussa. Mittaus tapahtuu LAM-asemilla."}
