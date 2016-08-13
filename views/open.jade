@@ -28,22 +28,38 @@ html
     function addDataToContent(data) {
       
       if(data.text) {
+        var row1 = document.createElement('div');
+        row1.className = "row";
+        var col1_row1 = document.createElement('div');
+        col1_row1.className="col-sm-12";
+        
         element = document.createElement('p');
         element.className='simpleTextModule'
         element.innerHTML = data.text;
-        $("#datas").append(element);
+        col1_row1.appendChild(element);
+        row1.appendChild(col1_row1);
+        $(".appendhere").append(row1);
       } 
       
       if(data.img) {
-        element = document.createElement('img');
-        element.src = data.img.src;
-        $("#datas").append(element);
-        $("#datas").append(document.createElement('br'));
+        $(".appendhere").append(getImageRow(data.img));
       }
       
       if(data.lamdata) {
         addLamData(data.lamdata);        
       }
+    }
+
+    function getImageRow(img) {
+      var row1 = document.createElement('div');
+      row1.className = "row";
+      var col1_row1 = document.createElement('div');
+      col1_row1.className="col-sm-12 lamHeader";
+      imagelement = document.createElement('img');
+      imagelement.src = img.src;
+      col1_row1.appendChild(imagelement);
+      row1.appendChild(col1_row1);
+      return row1;
     }
 
     function addLamData(data) {
