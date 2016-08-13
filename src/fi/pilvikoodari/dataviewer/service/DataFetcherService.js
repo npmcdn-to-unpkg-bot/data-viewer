@@ -4,6 +4,7 @@ var menuItemService = require.main.require('./src/fi/pilvikoodari/dataviewer/ser
 
 var weatherCamModule  = require.main.require('./src/fi/pilvikoodari/dataviewer/modules/WeatherCam.js');
 var simpleTextModule  = require.main.require('./src/fi/pilvikoodari/dataviewer/modules/SimpleText.js');
+var trafficStatsModule  = require.main.require('./src/fi/pilvikoodari/dataviewer/modules/TrafficStats.js');
 
 module.exports = {
     // RETRUNS PROMISE
@@ -47,6 +48,8 @@ function handleItem(functionDTO, allFunctionsData) {
             weatherCamModule.getData(functionDTO).then(succ,fail);            
         } else if(functionDTO.moduleid==='simpletext') {
             simpleTextModule.getData(functionDTO).then(succ,fail);
+        } else if(functionDTO.moduleid==='trafficstats') {
+            trafficStatsModule.getData(functionDTO).then(succ,fail);
         } else {
             logger.warn("No module for " + functionDTO.moduleid);
             reject();

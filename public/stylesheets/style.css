@@ -9,8 +9,8 @@ a {
 
 .systemName {
   color: #9999FF;
-  font: 24px Helvetica, Arial, sans-serif;
   background-color : #D7E2EE;
+  font: 24px Helvetica, Arial, sans-serif;
   text-align: center;
   padding: 10px;
   
@@ -36,4 +36,15 @@ a {
   font: 18px Helvetica, Arial, sans-serif,  italic;
 }
 
+.lamHeader {
+  color: #9999FF;
+  background-color : #D7E2EE;
+  font: 18px Helvetica, Arial, sans-serif;
+  border:solid #9999FA 1px;
+}
+
+.lamData {
+  font: 18px Helvetica, Arial, sans-serif;
+  border:solid #9999FA 1px;
+}
 

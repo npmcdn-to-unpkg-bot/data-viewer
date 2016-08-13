@@ -32,12 +32,39 @@ html
         element.className='simpleTextModule'
         element.innerHTML = data.text;
         $("#datas").append(element);
-      } else if(data.img) {
+      } 
+      
+      if(data.img) {
         element = document.createElement('img');
         element.src = data.img.src;
         $("#datas").append(element);
         $("#datas").append(document.createElement('br'));
       }
+      
+      if(data.lamdata) {
+        addLamData(data.lamdata);        
+      }
+    }
+
+    function addLamData(data) {
+      $(".appendhere").append(getLamDataRow("LAM tunniste", data.lamid));
+      $(".appendhere").append(getLamDataRow("Mittausaika", data.time));
+      $(".appendhere").append(getLamDataRow("Liikennemäärä 1", data.trafficvolume1));
+      $(".appendhere").append(getLamDataRow("Liikennemäärä 2", data.trafficvolume2));
+    }
+
+    function getLamDataRow(dataHeader, data) {
+      var row1 = document.createElement('div');
+      row1.className = "row";
+      var col1_row1 = document.createElement('div');
+      col1_row1.className="col-sm-4 lamHeader";
+      col1_row1.innerHTML = dataHeader;
+      var col2_row1 = document.createElement('div');
+      col2_row1.className="col-sm-6 lamData";
+      col2_row1.innerHTML = data;
+      row1.appendChild(col1_row1);
+      row1.appendChild(col2_row1);
+      return row1;
     }
 
   title=title
@@ -52,9 +79,7 @@ html
      div.col-sm-12.menuItem
       a(href="/menu/#{systemId}") << takaisin
       p
-    div.row
-     div.col-sm-12
-     #datas
+    div.appendhere
     div.row
      div.col-sm-12.menuItem
       p
