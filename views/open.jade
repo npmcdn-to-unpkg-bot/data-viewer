@@ -29,6 +29,8 @@ html
       
       if(data.text) {
         element = document.createElement('p');
+        element.className='simpleTextModule'
+        element.innerHTML = data.text;
         $("#datas").append(element);
       } else if(data.img) {
         element = document.createElement('img');
