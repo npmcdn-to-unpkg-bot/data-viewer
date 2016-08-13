@@ -19,7 +19,7 @@ module.exports = {
                         });
 
                     Promise.all(promises).then(function() {
-                         resolve(allFunctionsData)}, reject());
+                         resolve(allFunctionsData)},  reason => reject());
 
                 } else {
                     reject();
