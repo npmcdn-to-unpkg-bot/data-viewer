@@ -3,7 +3,7 @@ var logger = require('log4js').getLogger();
 var menuItemService = require.main.require('./src/fi/pilvikoodari/dataviewer/service/MenuItemService.js');
 
 var weatherCamModule  = require.main.require('./src/fi/pilvikoodari/dataviewer/modules/WeatherCam.js');
-
+var simpleTextModule  = require.main.require('./src/fi/pilvikoodari/dataviewer/modules/SimpleText.js');
 
 module.exports = {
     // RETRUNS PROMISE
@@ -13,12 +13,14 @@ module.exports = {
 
             menuItemService.getMenuItemWithFunctions(menuItemId, function(err, item) {
                 if(!err) {
+
                     var promises = item.functions.map((funct) => {
-                        return handleItem(funct, allFunctionsData);
+                        return handleItem(funct.toObject(), allFunctionsData);
                         });
+
                     Promise.all(promises).then(function() {
-                         resolve(allFunctionsData)}
-                         );
+                         resolve(allFunctionsData)});
+
                 } else {
                     reject();
                 }
@@ -31,19 +33,22 @@ module.exports = {
 // RETURNS PROMISE
 function handleItem(functionDTO, allFunctionsData) {
     return new Promise(function(resolve, reject) {
+
+        var succ = function success(data) {
+            allFunctionsData.push(data);
+            resolve();
+        }
+
+        var fail = function failed() {
+            reject();
+        }
+
         if(functionDTO.moduleid==='weathercam') {
-            // WeatherCamModule.getData also returns Promise:
-            weatherCamModule.getData(functionDTO).then(
-                function success(data) {
-                    allFunctionsData.push(data);
-                    resolve();
-                },
-                function failed() {
-                    reject();
-                }
-            )
+            weatherCamModule.getData(functionDTO).then(succ,fail);            
+        } else if(functionDTO.moduleid==='simpletext') {
+            simpleTextModule.getData(functionDTO).then(succ,fail);
         } else {
-            logger.info("No module for " + functionDTO.moduleid);
+            logger.warn("No module for " + functionDTO.moduleid);
             reject();
         }
     })
