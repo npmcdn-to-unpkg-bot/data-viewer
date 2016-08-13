@@ -24,6 +24,7 @@ router.get('/menu/open/:menuItemId', function(req, res, next) {
         
           function failed() {
             logger.error('Open menuitem failed.');
+            res.render('open', {data : [], systemId : item.toObject().systemId});
           })
         .catch(function() {
           logger.error("Open menuItem failed");

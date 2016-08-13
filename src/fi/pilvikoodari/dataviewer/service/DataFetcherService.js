@@ -19,7 +19,7 @@ module.exports = {
                         });
 
                     Promise.all(promises).then(function() {
-                         resolve(allFunctionsData)});
+                         resolve(allFunctionsData)}, reject());
 
                 } else {
                     reject();
