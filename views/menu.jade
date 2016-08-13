@@ -44,8 +44,8 @@ html
     });
     
     function addError(errorText) {
-      var before = $("#errorText").html();
-      $("#errorText").html(before + " <i>" + errorText +"</i>");
+     var before = $("#errorText").html();
+     $("#errorText").html(before + ' ' + errorText);
     }
     
     function setSystemData(systemInfo) {
@@ -65,7 +65,7 @@ html
         br = document.createElement('br');
         $("#menuItems").append(identations).append(a).append(br); 
       } else {
-        itemElem.innerHTML = identations + menuItem.text;;
+        itemElem.innerHTML = identations + menuItem.text;
         itemElem.setAttribute("class", 'menuItem');
         $("#menuItems").append(itemElem);
       }
@@ -77,27 +77,24 @@ html
   body
    div.container-floating
     div.row
-     div.col-sm-12
-      div.systemName
-       #systemName
+     div.col-sm-12.systemName
+      #systemName
     hr
     div.row
-     div.col-sm-12
-      font(color="red")
-       #errorText
-    div.row
-     div.col-sm-12 
-      div.systemNotes
-       #systemNotes
+     div.col-sm-12.systemNotes
+      #systemNotes
     hr
     div.row
-     div.col-sm-12
+     div.col-sm-12.errorText
+      #errorText
+    div.row
+     div.col-sm-12.menuItem
       a(href="/") << takaisin
       p
     div.row
-     div.col-sm-12
+     div.col-sm-12.menuItem
       #menuItems
     div.row
-     div.col-sm-12
+     div.col-sm-12.menuItem
       p
       a(href="/") << takaisin

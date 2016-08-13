@@ -26,8 +26,8 @@ html
     });
     
     function addError(errorText) {
-    var before = $("#errorText").html();
-     $("#errorText").html(before + " <i>" + errorText +"</i>");
+     var before = $("#errorText").html();
+     $("#errorText").html(before + ' ' + errorText);
     }
     
     function getLinkToSystem(systemId, systemName) {
@@ -40,10 +40,14 @@ html
   title= title
   link(rel='stylesheet', href='/stylesheets/style.css')
   body
-   h1= pagemetadata.pagetitle
-   font(color="red")
-    #errorText
-   b Valitse sovellus
-   br
-   #systems
-   br
+  div.container-floating
+    div.row
+     div.col-sm-12
+      div.systemName Avoimen datan palvelut
+   div.row
+     div.col-sm-12
+      div.errorText
+       #errorText
+   div.row
+     div.col-sm-12.menuItem
+      #systems

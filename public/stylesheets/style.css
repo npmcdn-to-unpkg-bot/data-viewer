@@ -8,17 +8,27 @@ a {
 }
 
 .systemName {
-  color: #0000FA;
-  font: 20px Helvetica, Arial, sans-serif;
+  color: #9999FF;
+  font: 24px Helvetica, Arial, sans-serif;
+  background-color : #D7E2EE;
+  text-align: center;
+  padding: 10px;
+  
 }
 
 .systemNotes {
   color: gray;
-  font: italic 14px Helvetica, Arial, sans-serif;
+  font: italic 18px Helvetica, Arial, sans-serif;
 }
 
 .menuItem {
   color: black;
-  font: 16px Helvetica, Arial, sans-serif;
+  font: 18px Helvetica, Arial, sans-serif;
 }
+
+.errorText {
+  color: red;
+  font: 18px Helvetica, Arial, sans-serif,  italic;
+}
+
 
