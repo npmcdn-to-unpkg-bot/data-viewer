@@ -3,10 +3,17 @@ var router = express.Router();
 
 var dataFetcherService = require.main.require('./src/fi/pilvikoodari/dataviewer/service/DataFetcherService.js');
 var menuItemService = require.main.require('./src/fi/pilvikoodari/dataviewer/service/MenuItemService.js');
+var systemService = require.main.require('./src/fi/pilvikoodari/dataviewer/service/SystemService.js');
 
 /* GET Listing page */
 router.get('/menu/:systemId', function(req, res, next) {
-  res.render('menu', { systemId: req.params.systemId });
+  systemService.getSystem(req.params.systemId, function(err, system) {
+    if(!err) 
+       res.render('menu', { systemId: req.params.systemId, title : system.name });
+     else
+       res.render('menu', { systemId: req.params.systemId });
+     
+  });
 });
 
 /* GET item page */
@@ -19,7 +26,7 @@ router.get('/menu/open/:menuItemId', function(req, res, next) {
         .then(
         
           function success(dataToShow) {
-            res.render('open', { data: dataToShow, systemId : item.toObject().systemId});
+            res.render('open', { data: dataToShow, systemId : item.toObject().systemId, menuItemText : item.toObject().text});
           }, 
         
           function failed() {
