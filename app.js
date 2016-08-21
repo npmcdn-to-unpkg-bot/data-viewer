@@ -9,6 +9,7 @@ var router = express.Router();
 
 var routesIndex = require('./routes/index_routes.js')
 var routesSystemMenu = require('./routes/menu_routes.js')
+var routesAdmin = require('./routes/admin_routes.js')
 
 var db = require('./models/db.js');
 
@@ -24,7 +25,7 @@ var morganLogger = morgan("combined", {
 app.use(morganLogger);
 
 // ^v ADD NEW ROUTER FILES HERE ^v
-app.use('/', routesIndex, routesSystemMenu, routesSystemServices, menuitemServices)
+app.use('/', routesIndex, routesSystemMenu, routesSystemServices, menuitemServices, routesAdmin)
 
 //view engine setup (JADE)
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE"); // PUT is not implemented
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
   next();
 });
 

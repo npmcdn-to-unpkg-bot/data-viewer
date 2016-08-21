@@ -10,8 +10,10 @@ router.get('/menu/:systemId', function(req, res, next) {
   systemService.getSystem(req.params.systemId, function(err, system) {
     if(!err) 
        res.render('menu', { systemId: req.params.systemId, title : system.name });
-     else
+     else {
+       logger.error(err);
        res.render('menu', { systemId: req.params.systemId });
+    }
      
   });
 });

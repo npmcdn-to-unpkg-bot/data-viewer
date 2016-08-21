@@ -1,0 +1,163 @@
+doctype html
+html
+  head
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+
+   script(src="https://npmcdn.com/react@15.3.0/dist/react.js")
+   script(src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js")
+   script(src="https://npmcdn.com/babel-core@5.8.38/browser.min.js")
+   script(src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js")
+   script(src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+   script.
+    function showSystemInfo(systemid, systemname) {
+        alert(systemname);
+    }   
+
+  title Palveluiden ylläpito
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(id="content" class="container-floating")
+   script(type="text/babel").
+    // SYSTEM ITEM
+    var SystemItem = React.createClass({displayName: 'SystemItem',
+        render : function() {
+            return (
+                <div className="SystemItem">
+                  <div className="row">
+                    <div className="col-sm-4 menuItem">
+                      {this.props.system.name}&nbsp;
+                      </div>
+                      <div className="col-sm-8 menuItem">
+                      <button id="serviceinfo" type="button" className="btn btn-info btn-sm" onClick={this.showInfo.bind(this, this.props.system)}>Tiedot</button>
+                      &nbsp;
+                      <button id="editservice" type="button" className="btn btn-primary btn-sm">Muokkaa</button>
+                      &nbsp;
+                      <button id="deleteservice" type="button" className="btn btn-danger btn-sm" onClick={this.deleteSystem.bind(this, this.props.system)}>Poista</button>
+                      &nbsp;
+                      <br/>
+
+                      <div id={'info_'+this.props.system._id} className = "infoBox" style={{display: 'none' }}>
+                        id = {this.props.system._id}<br/>
+                        Nimi = {this.props.system.name}<br/>
+                        Otsikko = {this.props.system.title}<br/>
+                        Huomautukset = {this.props.system.notes}<br/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            )
+        },
+
+        showInfo : function(systemToShow) {
+            $('#info_'+systemToShow._id).toggle();
+        },
+
+        
+        deleteSystem : function(systemToDelete) {
+            if(confirm('VAROITUS!\nPoistetaanko palvelu ' + systemToDelete.name + ' kokonaan?' +
+            ' Samalla poistetaan kaikki palvelun valikot ja toiminnot.')) {
+                this.props.onDeleteSystem(systemToDelete._id);
+            }
+        }
+    });
+
+    // SYSTEMS LIST
+    var SystemsList = React.createClass({displayName: 'SystemsList',
+        render : function() {
+            var systems = this.props.data.map(function(sys) {
+                return (
+                    <SystemItem key={sys._id} system={sys} onDeleteSystem={this.props.onDeleteSystem} />
+                )
+            }, this);
+            return (
+                <div className="commentList">
+                    {systems}
+                </div>
+            );
+        }//render
+    });
+
+    // SYSTEMS BOX
+    var SystemsBox = React.createClass({
+
+        showError : function(errorTextToAdd) {
+            this.setState({errorText : errorTextToAdd});
+        },
+
+        showMessage : function(msg) {
+            this.setState({messageText: msg});
+            $(".messageText").show();
+        },
+
+        loadSystems : function() {
+            $.ajax({
+                url : this.props.url,
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,
+
+                success: function(data) {
+                    this.setState({data : data})
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Tietosisällön haku epäonnistui.');
+                }.bind(this)
+            });//ajax             
+        }, // loadSystems
+
+        deleteSystem : function(id) {
+            $.ajax({
+                url : (this.props.url + "/" + id),
+                type : 'DELETE',
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,                
+                
+                success: function(data) {
+                    this.showMessage('Tiedot poistettu.');
+                    this.loadSystems();
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Poisto  epäonnistui.');
+                }.bind(this)
+
+            });//ajax
+        }, //deleteSystem
+
+        getInitialState: function() {
+            return {
+                 data: [],
+                 errorText : '',
+                 messageText : ' '
+                 };
+        },
+
+        componentDidMount: function() {
+            this.loadSystems();
+        },
+
+        render : function() {
+            return (
+                <div className="SystemsBox">
+                    <div className="systemName">Palveluiden ylläpito</div>
+                    <div className="errorText">{this.state.errorText}</div>
+                    <div className="messageText">{this.state.messageText}</div>
+                    <div className="alert alert-success" style={{display: 'none', margin : "10px" }} >
+                        <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {this.state.message}
+                    </div>
+                    <SystemsList data={this.state.data} onDeleteSystem={this.deleteSystem} />
+                </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+        <SystemsBox url = "/systemService" />,
+        document.getElementById('content')
+    );

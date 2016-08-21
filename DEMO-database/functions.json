@@ -1,12 +1,11 @@
-{"_id":{"$oid":"57a727d8dcba0f71400fff31"},"menuitemid":"57a72478dcba0f71400ffed3","ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04506","presetid":"C0450602","roadstationid":"4506"}}
-{"_id":{"$oid":"57a7282fdcba0f71400fff37"},"menuitemid":"57a72412dcba0f71400ffec4","ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04504","presetid":"C0450402","roadstationid":"4504"}}
-{"_id":{"$oid":"57a7287fdcba0f71400fff3d"},"menuitemid":"","ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04508","presetid":"C0450802","roadstationid":"4508"}}
-{"_id":{"$oid":"57a728c6dcba0f71400fff49"},"menuitemid":"57a724c3dcba0f71400ffedb","ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04510","presetid":"C0451002","roadstationid":"4510"}}
-{"_id":{"$oid":"57a72909dcba0f71400fff58"},"menuitemid":"57a724e7dcba0f71400ffee4","ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04513","presetid":"C0451302","roadstationid":"4513"}}
-{"_id":{"$oid":"57a73b4fdcba0f7140100180"},"menuitemid":"57a72478dcba0f71400ffed3","ordernumber":2,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04506","presetid":"C0450609","roadstationid":"4506"}}
-{"_id":{"$oid":"57af401fdcba0f1d268f82da"},"menuitemid":"579f91eef36d2808839b23be","ordernumber":1,"moduleid":"simpletext","moduleparameters":{"text":"Hatanpaalla tuulee."}}
-{"_id":{"$oid":"57af4ef1dcba0f1d268f859b"},"menuitemid":"57af4d45dcba0f1d268f8563","ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"438"}}
-{"_id":{"$oid":"57af4f50dcba0f1d268f85a3"},"menuitemid":"57af4d68dcba0f1d268f8573","ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"456"}}
-{"_id":{"$oid":"57af4fb0dcba0f1d268f85a8"},"menuitemid":"57af4dc8dcba0f1d268f857d","ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"421"}}
-{"_id":{"$oid":"57af4fd6dcba0f1d268f85a9"},"menuitemid":"57af4dfcdcba0f1d268f8583","ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"462"}}
-{"_id":{"$oid":"57af500bdcba0f1d268f85bc"},"menuitemid":"57af4e69dcba0f1d268f858e","ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"453"}}
+{"_id":{"$oid":"57a727d8dcba0f71400fff31"},"menuitemid":{"$oid":"57a72478dcba0f71400ffed3"},"ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04506","presetid":"C0450602","roadstationid":"4506"}}
+{"_id":{"$oid":"57a7282fdcba0f71400fff37"},"menuitemid":{"$oid":"57a72412dcba0f71400ffec4"},"ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04504","presetid":"C0450402","roadstationid":"4504"}}
+{"_id":{"$oid":"57a728c6dcba0f71400fff49"},"menuitemid":{"$oid":"57a724c3dcba0f71400ffedb"},"ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04510","presetid":"C0451002","roadstationid":"4510"}}
+{"_id":{"$oid":"57a72909dcba0f71400fff58"},"menuitemid":{"$oid":"57a724e7dcba0f71400ffee4"},"ordernumber":1,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04513","presetid":"C0451302","roadstationid":"4513"}}
+{"_id":{"$oid":"57a73b4fdcba0f7140100180"},"menuitemid":{"$oid":"57a72478dcba0f71400ffed3"},"ordernumber":2,"moduleid":"weathercam","moduleparameters":{"cameraid":"C04506","presetid":"C0450609","roadstationid":"4506"}}
+{"_id":{"$oid":"57af401fdcba0f1d268f82da"},"menuitemid":{"$oid":"579f91eef36d2808839b23be"},"ordernumber":1,"moduleid":"simpletext","moduleparameters":{"text":"Hatanpaalla tuulee."}}
+{"_id":{"$oid":"57af4ef1dcba0f1d268f859b"},"menuitemid":{"$oid":"57af4d45dcba0f1d268f8563"},"ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"438"}}
+{"_id":{"$oid":"57af4f50dcba0f1d268f85a3"},"menuitemid":{"$oid":"57af4d68dcba0f1d268f8573"},"ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"456"}}
+{"_id":{"$oid":"57af4fb0dcba0f1d268f85a8"},"menuitemid":{"$oid":"57af4dc8dcba0f1d268f857d"},"ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"421"}}
+{"_id":{"$oid":"57af4fd6dcba0f1d268f85a9"},"menuitemid":{"$oid":"57af4dfcdcba0f1d268f8583"},"ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"462"}}
+{"_id":{"$oid":"57af500bdcba0f1d268f85bc"},"menuitemid":{"$oid":"57af4e69dcba0f1d268f858e"},"ordernumber":2,"moduleid":"trafficstats","moduleparameters":{"LAM":"453"}}

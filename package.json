@@ -1,26 +1,25 @@
 {
-	"name": "data-viewer",
-	"version": "1.0.1",
-	"description": "App to load and show data from web.",
-	"main": "app.js",
-	"scripts": {
-	    "start": "node ./app.js"
-	},
-	"repository": {
+  "name": "data-viewer",
+  "version": "1.0.1",
+  "description": "App to load and show data from web.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/anttirauhala/data-viewer.git"
   },
-	"author": "Antti Rauhala",
-	"dependencies": 
-	{
-		"log4js" : "",
-		"express": "4.13.4",
-		"jade": "1.11.0",
-		"morgan": "1.7.0",
-    	"body-parser": "1.15.1",
-		"path": "0.12.7",
-		"mongoose" : "4.5.7",
-		"unirest" : "0.5.0",
-		"xml2js" : "0.4.17"
-	}
+  "author": "Antti Rauhala",
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "express": "4.13.4",
+    "jade": "1.11.0",
+    "log4js": "",
+    "mongoose": "4.5.7",
+    "morgan": "1.7.0",
+    "path": "0.12.7",
+    "unirest": "0.5.0",
+    "xml2js": "0.4.17"
+  }
 }

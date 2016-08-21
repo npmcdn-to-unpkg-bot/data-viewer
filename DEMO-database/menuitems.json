@@ -1,18 +1,17 @@
-{"_id":{"$oid":"579e47e7f36d2808839abfb7"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"","text":"Säätiedot"}
-{"_id":{"$oid":"579e485ff36d2808839abfcf"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Tampere"}
-{"_id":{"$oid":"579e48aaf36d2808839abfd8"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Helsinki"}
-{"_id":{"$oid":"579e48bbf36d2808839abfdb"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Turku"}
-{"_id":{"$oid":"579e48cbf36d2808839abfdc"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e47e7f36d2808839abfb7","text":"Oulu"}
-{"_id":{"$oid":"579f91eef36d2808839b23be"},"systemId":"579e2ca1f36d2808839abb6a","parentItemId":"579e485ff36d2808839abfcf","text":"Hatanpää","functions":["57af401fdcba0f1d268f82da"]}
-{"_id":{"$oid":"57a723c8dcba0f71400ffebf"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"","text":"Tampereen ympäristö"}
-{"_id":{"$oid":"57a72412dcba0f71400ffec4"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 9 Suinula (Tampereelle päin)","functions":["57a7282fdcba0f71400fff37"]}
-{"_id":{"$oid":"57a72478dcba0f71400ffed3"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 3 Sasi (Tampereelle päin)","functions":["57a727d8dcba0f71400fff31","57a73b4fdcba0f7140100180"]}
-{"_id":{"$oid":"57a724acdcba0f71400ffed7"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 11 Nokia, Murhasaari (Tampereelle päin)","functions":"57a7287fdcba0f71400fff3d"}
-{"_id":{"$oid":"57a724c3dcba0f71400ffedb"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 65 Kuru (Tampereelle päin)","functions":["57a728c6dcba0f71400fff49"]}
-{"_id":{"$oid":"57a724e7dcba0f71400ffee4"},"systemId":"57a7062adcba0f71400ffb4e","parentItemId":"57a723c8dcba0f71400ffebf","text":"Tie 9 Orivesi, Oritupa (Tampereelle päin)","functions":["57a72909dcba0f71400fff58"]}
-{"_id":{"$oid":"57af4c70dcba0f1d268f8546"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"","text":"Tampereen seutu"}
-{"_id":{"$oid":"57af4d45dcba0f1d268f8563"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"57af4c70dcba0f1d268f8546","text":"Tie 12 Uittotunneli","functions":["57af4ef1dcba0f1d268f859b"]}
-{"_id":{"$oid":"57af4d68dcba0f1d268f8573"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"57af4c70dcba0f1d268f8546","text":"Tie 65 Tampere, Lielahti","functions":["57af4f50dcba0f1d268f85a3"]}
-{"_id":{"$oid":"57af4dc8dcba0f1d268f857d"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"57af4c70dcba0f1d268f8546","text":"Tie 65 Ylöjärvi","functions":"57af4fb0dcba0f1d268f85a8"}
-{"_id":{"$oid":"57af4dfcdcba0f1d268f8583"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"57af4c70dcba0f1d268f8546","text":"Tie 13782 Nokia, Rajasalmi","functions":"57af4fd6dcba0f1d268f85a9"}
-{"_id":{"$oid":"57af4e69dcba0f1d268f858e"},"systemId":"57af4a5fdcba0f1d268f84d7","parentItemId":"57af4c70dcba0f1d268f8546","text":"Tie 12 Särkänniemi","functions":["57af500bdcba0f1d268f85bc"]}
+{"_id":{"$oid":"579e47e7f36d2808839abfb7"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"text":"Säätiedot"}
+{"_id":{"$oid":"579e485ff36d2808839abfcf"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"parentItemId":{"$oid":"579e47e7f36d2808839abfb7"},"text":"Tampere"}
+{"_id":{"$oid":"579e48aaf36d2808839abfd8"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"parentItemId":{"$oid":"579e47e7f36d2808839abfb7"},"text":"Helsinki"}
+{"_id":{"$oid":"579e48bbf36d2808839abfdb"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"parentItemId":{"$oid":"579e47e7f36d2808839abfb7"},"text":"Turku"}
+{"_id":{"$oid":"579e48cbf36d2808839abfdc"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"parentItemId":{"$oid":"579e47e7f36d2808839abfb7"},"text":"Oulu"}
+{"_id":{"$oid":"579f91eef36d2808839b23be"},"systemId": {"$oid":"579e2ca1f36d2808839abb6a"},"parentItemId":{"$oid":"579e485ff36d2808839abfcf"},"text":"Hatanpää","functions":[{"$oid":"57af401fdcba0f1d268f82da"}]}
+{"_id":{"$oid":"57a723c8dcba0f71400ffebf"},"systemId": {"$oid":"57a7062adcba0f71400ffb4e"},"text":"Tampereen ympäristö"}
+{"_id":{"$oid":"57a72412dcba0f71400ffec4"},"systemId": {"$oid":"57a7062adcba0f71400ffb4e"},"parentItemId":{"$oid":"57a723c8dcba0f71400ffebf"},"text":"Tie 9 Suinula (Tampereelle päin)","functions":[{"$oid":"57a7282fdcba0f71400fff37"}]}
+{"_id":{"$oid":"57a72478dcba0f71400ffed3"},"systemId": {"$oid":"57a7062adcba0f71400ffb4e"},"parentItemId":{"$oid":"57a723c8dcba0f71400ffebf"},"text":"Tie 3 Sasi (Tampereelle päin)","functions":[{"$oid":"57a727d8dcba0f71400fff31"},{"$oid":"57a73b4fdcba0f7140100180"}]}
+{"_id":{"$oid":"57a724c3dcba0f71400ffedb"},"systemId": {"$oid":"57a7062adcba0f71400ffb4e"},"parentItemId":{"$oid":"57a723c8dcba0f71400ffebf"},"text":"Tie 65 Kuru (Tampereelle päin)","functions":[{"$oid":"57a728c6dcba0f71400fff49"}]}
+{"_id":{"$oid":"57a724e7dcba0f71400ffee4"},"systemId": {"$oid":"57a7062adcba0f71400ffb4e"},"parentItemId":{"$oid":"57a723c8dcba0f71400ffebf"},"text":"Tie 9 Orivesi, Oritupa (Tampereelle päin)","functions":[{"$oid":"57a72909dcba0f71400fff58"}]}
+{"_id":{"$oid":"57af4c70dcba0f1d268f8546"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"text":"Tampereen seutu"}
+{"_id":{"$oid":"57af4d45dcba0f1d268f8563"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"parentItemId":{"$oid":"57af4c70dcba0f1d268f8546"},"text":"Tie 12 Uittotunneli","functions":[{"$oid":"57af4ef1dcba0f1d268f859b"}]}
+{"_id":{"$oid":"57af4d68dcba0f1d268f8573"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"parentItemId":{"$oid":"57af4c70dcba0f1d268f8546"},"text":"Tie 65 Tampere, Lielahti","functions":[{"$oid":"57af4f50dcba0f1d268f85a3"}]}
+{"_id":{"$oid":"57af4dc8dcba0f1d268f857d"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"parentItemId":{"$oid":"57af4c70dcba0f1d268f8546"},"text":"Tie 65 Ylöjärvi","functions":[{"$oid":"57af4fb0dcba0f1d268f85a8"}]}
+{"_id":{"$oid":"57af4dfcdcba0f1d268f8583"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"parentItemId":{"$oid":"57af4c70dcba0f1d268f8546"},"text":"Tie 13782 Nokia, Rajasalmi","functions":[{"$oid":"57af4fd6dcba0f1d268f85a9"}]}
+{"_id":{"$oid":"57af4e69dcba0f1d268f858e"},"systemId": {"$oid":"57af4a5fdcba0f1d268f84d7"},"parentItemId":{"$oid":"57af4c70dcba0f1d268f8546"},"text":"Tie 12 Särkänniemi","functions":[{"$oid":"57af500bdcba0f1d268f85bc"}]}

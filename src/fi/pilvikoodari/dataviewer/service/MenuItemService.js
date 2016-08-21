@@ -1,11 +1,13 @@
 var logger = require('log4js').getLogger();
 
 var MenuItemDTO = require.main.require("./models/MenuItem.js");
+var ObjectId = require('mongoose').Types.ObjectId; 
+
 
 module.exports = { 
 
     getMenuItems : function getMenuItems(systemId, callback) {
-        MenuItemDTO.find({"systemId" : systemId}, function (err, menuItems) {
+        MenuItemDTO.find({"systemId" : ObjectId(systemId)}, function (err, menuItems) {
             if(!err) {
                 unsorted = [];
                 sorted = [];
@@ -20,7 +22,7 @@ module.exports = {
     },
     
     getMenuItemsWithFunctions : function getMenuItemsWithFunctions(systemId, callback) {
-        MenuItemDTO.find({"systemId" : systemId}).
+        MenuItemDTO.find({"systemId" : ObjectId(systemId)}).
         populate("functions").exec(function (err, menuItems) {
             if(!err) {
                 unsorted = [];
@@ -36,7 +38,7 @@ module.exports = {
     },
 
     getMenuItemWithFunctions : function getMenuItemWithFunctions(menuItemId, callback) {
-        MenuItemDTO.findById({"_id" : menuItemId}).
+        MenuItemDTO.findById({"_id" : ObjectId(menuItemId)}).
         populate("functions").exec(function (err, item) {
             if(!err) {
                 callback(err, item);
@@ -63,8 +65,8 @@ function addRootAndChilds(rootItem, allItems, sorted, identation) {
     // Find childs
     var childs = [];
     for(var i=0;i<allItems.length;i++) {
-        if(allItems[i].parentItemId==rootItem._id) {
-        childs.push(allItems[i]);
+        if(allItems[i].parentItemId && allItems[i].parentItemId.toString()==rootItem._id.toString()) {
+            childs.push(allItems[i]);
         }
     }
     // Sort childs

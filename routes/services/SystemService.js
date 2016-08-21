@@ -5,6 +5,8 @@ var logger = require('log4js').getLogger();
 
 var systemService = require.main.require('./src/fi/pilvikoodari/dataviewer/service/SystemService.js');
 
+var ObjectId = require('mongoose').Types.ObjectId; 
+
 var config = require.main.require('./config.json');
 
 var options = {
@@ -27,5 +29,18 @@ router.get('/systemService/:id', function(req, res, next) {
 		res.end(JSON.stringify(systemInfo));
 	});
 });
+
+/* DELETE One system */
+router.delete('/systemService/:id', function(req, res, next) {
+	systemService.removeSystem(req.params.id, function (err) {
+		if(err) {
+			res.status(500).send({ error: "Delete failed." });
+		} else {
+			res.send({success : true});
+			res.end();
+		}
+	});
+});
+
 
 module.exports = router;
