@@ -30,6 +30,13 @@ router.get('/systemService/:id', function(req, res, next) {
 	});
 });
 
+/* PUT One system */
+router.put('/systemService/:id', function(req, res, next) {
+	systemService.updateSystem(req.params.id, req.body, function (err, systemInfo) {
+		res.end(JSON.stringify(systemInfo));
+	});
+});
+
 /* DELETE One system */
 router.delete('/systemService/:id', function(req, res, next) {
 	systemService.removeSystem(req.params.id, function (err) {

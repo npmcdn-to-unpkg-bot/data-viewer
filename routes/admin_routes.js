@@ -7,8 +7,8 @@ router.get('/admin/systems', function(req, res, next) {
 });
 
 // GET admin page for systems menuitems
-router.get('/admin/menuitems/:systemId', function(req, res, next) {
-  res.render('adminmenuitems', { systemId: req.params.systemId });
+router.get('/admin/system/:systemId', function(req, res, next) {
+  res.render('adminsystem', { systemId: req.params.systemId });
 });
 
 module.exports = router;

@@ -36,6 +36,26 @@ module.exports = {
 	    });
     },
 
+    updateSystem : function updateSystem(id, newdata, callback) {
+        SystemDTO.findOne({"_id" : id}, function (err, systemInfo) {
+            if(!err) {
+                var sys = systemInfo.toObject();
+                for (var property in sys) {
+                   if (sys.hasOwnProperty(property)) {
+                       if(newdata.hasOwnProperty(property)) {
+                           systemInfo[property]=newdata[property];
+                       }
+                    }
+                }
+                systemInfo.save();
+                callback(err, systemInfo);
+            } else {
+                logger.error(err);
+                callback(err);
+            }
+	    });
+    },
+
     removeSystem : function removeSystem(systemId, callback) {
 
         new Promise(function(resolve, reject) 

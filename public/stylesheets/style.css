@@ -7,6 +7,18 @@ a {
   color: #00B7FF;
 }
 
+.errorText {
+  color: red;
+  font: 18px Helvetica, Arial, sans-serif,  italic;
+  margin: 10px;
+}
+
+.messageText {
+  color: blue;
+  font: 18px Helvetica, Arial, sans-serif,  italic;
+  margin: 10px;
+}
+
 .systemName {
   color: #9999FF;
   background-color : #D7E2EE;
@@ -27,16 +39,34 @@ a {
   padding: 10px;
 }
 
-.errorText {
-  color: red;
-  font: 18px Helvetica, Arial, sans-serif,  italic;
+
+.dataHeader {
+  color: #9999FF;
+  background-color : #D7E2EE;
+  font: 18px Helvetica, Arial, sans-serif;
   margin: 10px;
 }
 
-.messageText {
-  color: blue;
-  font: 18px Helvetica, Arial, sans-serif,  italic;
-  margin: 10px;
+.invisibleBg {
+  background-color : white;
+}
+
+.dataEdit {
+  color: black;
+  font: 18px Helvetica, Arial, sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.inputField {
+  width: 25em;
+}
+
+.inputTextArea {
+    width: 100%;
+    height: 150px;
 }
 
 .simpleTextModule {

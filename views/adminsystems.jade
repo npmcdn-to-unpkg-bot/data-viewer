@@ -31,11 +31,11 @@ html
                       {this.props.system.name}&nbsp;
                       </div>
                       <div className="col-sm-8 menuItem">
-                      <button id="serviceinfo" type="button" className="btn btn-info btn-sm" onClick={this.showInfo.bind(this, this.props.system)}>Tiedot</button>
+                      <button id="serviceinfo" type="button" className="btn btn-info btn-sm" onClick={this.showInfo.bind(this, this.props.system) }>Tiedot</button>
                       &nbsp;
-                      <button id="editservice" type="button" className="btn btn-primary btn-sm">Muokkaa</button>
+                      <button id="editservice" type="button" className="btn btn-primary btn-sm" onClick={this.redirectToSystemEdit.bind(this, this.props.system) }>Muokkaa</button>
                       &nbsp;
-                      <button id="deleteservice" type="button" className="btn btn-danger btn-sm" onClick={this.deleteSystem.bind(this, this.props.system)}>Poista</button>
+                      <button id="deleteservice" type="button" className="btn btn-danger btn-sm" onClick={this.deleteSystem.bind(this, this.props.system) }>Poista</button>
                       &nbsp;
                       <br/>
 
@@ -55,7 +55,10 @@ html
             $('#info_'+systemToShow._id).toggle();
         },
 
-        
+        redirectToSystemEdit : function(systemToEdit) {
+            window.location.href='/admin/system/' + systemToEdit._id;    
+        },
+
         deleteSystem : function(systemToDelete) {
             if(confirm('VAROITUS!\nPoistetaanko palvelu ' + systemToDelete.name + ' kokonaan?' +
             ' Samalla poistetaan kaikki palvelun valikot ja toiminnot.')) {

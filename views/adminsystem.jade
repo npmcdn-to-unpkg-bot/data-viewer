@@ -1,0 +1,172 @@
+doctype html
+html
+  head
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+
+   script(src="https://npmcdn.com/react@15.3.0/dist/react.js")
+   script(src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js")
+   script(src="https://npmcdn.com/babel-core@5.8.38/browser.min.js")
+   script(src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js")
+   script(src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+   script.
+    function showSystemInfo(systemid, systemname) {
+        alert(systemname);
+    }   
+
+  title Palvelun ylläpito
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(id="content" class="container-floating")
+   script(type="text/babel").
+    // SYSTEM INFO BOX
+    var SystemBasicData = React.createClass({displayName: 'SystemBasicData',
+        showError : function(errorTextToAdd) {
+            this.setState({errorText : errorTextToAdd});
+        },
+
+        showMessage : function(msg) {
+            this.setState({messageText: msg});
+            $(".messageText").show();
+        },
+
+        loadSystem : function(id) {
+            $.ajax({
+                url : '/systemService/' + id,
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,
+
+                success: function(data) {
+                    this.setState({name : data.name,
+                                 title : data.title,
+                                 notes : data.notes})
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Tietosisällön haku epäonnistui.');
+                }.bind(this)
+            });//ajax             
+        }, // loadSystem
+
+        getInitialState: function() {
+            return {
+                name: '',
+                title: '',
+                notes: '',
+                errorText : ' ',
+                messageText : ' '
+                 };
+        },
+
+        componentDidMount: function() {
+            this.loadSystem(this.props.id);
+        },
+
+        handleNameChange : function(e) {
+            this.setState( { name : e.target.value});
+        },
+
+        handleTitleChange : function(e) {
+            this.setState( { title : e.target.value});
+        },
+
+        handleNotesChange : function(e) {
+            this.setState( { notes : e.target.value});
+        },
+
+        saveBasicData : function(e) {
+             $.ajax({
+                url : '/systemService/' + this.props.id,
+                type: "PUT",
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,
+                data: {
+                    name: this.state.name,
+                    title: this.state.title,
+                    notes: this.state.notes},
+
+                success: function(data) {
+                    this.showMessage('Tiedot päivitetty.');
+                    this.loadSystem(this.props.id);
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Päivitys epäonnistui.');
+                }.bind(this)
+            });//ajax             
+        },
+
+        render : function() {
+            return (
+                <div>
+                  <div className="systemName">Palvelun muokkaus</div>
+                  <div className="errorText">{this.state.errorText}</div>
+                  <div className="messageText">{this.state.messageText}</div>
+                  <form className="basicDataForm">
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Nimi
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                            <input
+                                    type="text"
+                                    className="inputField"
+                                    size="40"
+                                    placeholder="Nimi"
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange}
+                                    />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Otsikko
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                            <input
+                                    type="text"
+                                    className="inputField"
+                                    size="40"
+                                    placeholder="Otsikko"
+                                    value={this.state.title}
+                                    onChange={this.handleTitleChange}
+                                    />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Kuvaus
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                                <textarea
+                                    name="Kuvaus"
+                                    className="inputTextArea"
+                                    value={this.state.notes}
+                                    onChange={this.handleNotesChange}
+                                 />
+
+                        </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-3 dataHeader invisibleBg">
+                        &nbsp;
+                      </div>
+                      <div className="col-sm-6 dataEdit" >
+                        <button id="savebasicdata" type="button" className="btn btn-primary btn-sm" onClick={this.saveBasicData}>Tallenna</button>
+                      </div>
+                    </div>
+                  </form>
+                  </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+    <SystemBasicData id='#{systemId}'/>, document.getElementById('content')
+    );
+
+
