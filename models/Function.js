@@ -8,7 +8,8 @@ var functionSchema = new Schema({
 	moduleparameters: {
         cameraid : String,
         presetid : String,
-        roadstationid : String
+        roadstationid : String,
+        LAM : String
         },
     menuitem : [{ type: Schema.Types.ObjectId, ref: 'menuitems' }]
 });
