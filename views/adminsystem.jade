@@ -12,7 +12,7 @@ html
    meta(charset="utf-8")
    meta(name="viewport" content="width=device-width, initial-scale=1")
 
-  title Palvelun ylläpito
+  title Palvelun muokkaus
   link(rel='stylesheet', href='/stylesheets/style.css')
   body
    div(id="content" class="container-floating")
@@ -203,10 +203,10 @@ html
                       <br/>
 
                       <div id={'info_'+this.props.item._id} className = "infoBox" style={{display: 'none' }}>
-                        id = {this.props.item._id}<br/>
-                        Identation = {this.props.item.identation}<br/>
-                        Text = {this.props.item.text}<br/>
-                        Functions = {this.props.item.functions.length}<br/>
+                        <b>id</b> = {this.props.item._id}<br/>
+                        <b>Sisennys</b> = {this.props.item.identation}<br/>
+                        <b>Teksti</b> = {this.props.item.text}<br/>
+                        <b>Toimintoja</b> = {this.props.item.functions.length + ' kpl'}<br/>
                       </div>
                     </div>
                 </div>
