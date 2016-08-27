@@ -1,0 +1,173 @@
+html
+  head
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+
+   script(src="https://npmcdn.com/react@15.3.0/dist/react.js")
+   script(src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js")
+   script(src="https://npmcdn.com/babel-core@5.8.38/browser.min.js")
+   script(src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js")
+   script(src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+
+  title Toiminnon muokkaus
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div(id="content" class="container-floating")
+   script(type="text/babel").
+    // FUNCTION DATA
+    var FunctionData = React.createClass({displayName: 'FunctionData',
+    showError : function(errorTextToAdd) {
+        this.setState({errorText : errorTextToAdd});
+    },
+
+    showMessage : function(msg) {
+        this.setState({messageText: msg});
+        $(".messageText").show();
+    },
+
+    loadFunction : function(id) {
+        $.ajax({
+        url : '/functionService/' + id,
+        type: 'GET',
+        dataType: 'json',
+        cache: false,
+        timeout: 15000,
+        success: function(data) {
+            this.setState({ordernumber : data.ordernumber,
+                            moduleid : data.moduleid,
+                            moduleparameters : JSON.stringify(data.moduleparameters, null, 2)})
+        }.bind(this),
+
+        error: function(xhr, status, err) {
+            this.showError('Tietosisällön haku epäonnistui.');
+        }.bind(this)
+        
+      });//ajax             
+    }, // loadFunction
+
+    getInitialState: function() {
+        return {
+            ordernumber: 0,
+            moduleid: '',
+            moduleparameters: '',
+            errorText : ' ',
+            messageText : ''
+        };
+    },
+
+    componentDidMount: function() {
+        this.loadFunction(this.props.id);
+    },
+
+    handleOrderChange : function(e) {
+        this.setState( { ordernumber : e.target.value});
+    },
+
+    handleModuleIdChange : function(e) {
+        this.setState( { moduleid : e.target.value});
+    },
+
+    handleParamsChange : function(e) {
+        this.setState( { moduleparameters : e.target.value});
+    },
+
+    saveData : function(e) {
+        $.ajax({
+            url : '/functionService/' + this.props.id,
+            type: "PUT",
+            dataType: 'json',
+            cache: false,
+            timeout: 15000,
+            data: {
+                ordernumber: this.state.ordernumber,
+                moduleid: this.state.moduleid,
+                moduleparameters: this.state.moduleparameters},
+
+            success: function(data) {
+                this.showMessage('Tiedot päivitetty.');
+                this.loadFunction(this.props.id);
+            }.bind(this),
+
+            error: function(xhr, status, err) {
+                this.showError('Päivitys epäonnistui.');
+            }.bind(this)
+        });//ajax             
+    }, // saveData
+
+    render : function() {
+            return (
+                <div>
+                  <div className="systemName">Toiminnon muokkaus</div>
+                  <div className="errorText">{this.state.errorText}</div>
+                  <div className="messageText">{this.state.messageText}</div>
+                  <div className="menuItem"> <a href={'/admin/menuitem/' + this.props.menuItemId}> &lt;&lt; takaisin</a></div>
+                  <form className="basicDataForm">
+                    <div className="row">
+                      <div className="col-sm-12 dataTitle">
+                      TOIMINNON TIEDOT
+                      </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Järjestysnumero
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                            <input
+                                    type="text"
+                                    className="inputField"
+                                    size="5"
+                                    placeholder="Järjestysnumero"
+                                    value={this.state.ordernumber}
+                                    onChange={this.handleOrderChange}
+                                    />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Moduli
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                            <input
+                                    type="text"
+                                    className="inputField"
+                                    size="20"
+                                    placeholder="Moduli"
+                                    value={this.state.moduleid}
+                                    onChange={this.handleModuleIdChange}
+                                    />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-3 dataHeader">
+                        Modulin parametrit
+                        </div>
+                        <div className="col-sm-6 dataEdit">
+                                <textarea
+                                    name="Modulin parametrit"
+                                    className="inputTextArea"
+                                    value={this.state.moduleparameters}
+                                    onChange={this.handleParamsChange}
+                                 />
+
+                        </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-3 dataHeader invisibleBg">
+                        &nbsp;
+                      </div>
+                      <div className="col-sm-6 dataEdit" >
+                        <button id="savebasicdata" type="button" className="btn btn-primary btn-sm" onClick={this.saveData}>Tallenna tiedot</button>
+                      </div>
+                    </div>
+                  </form>
+                  <div className="menuItem"> <a href={'/admin/menuitem/' + this.props.menuItemId}> &lt;&lt; takaisin</a></div>
+                  </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+       <FunctionData id='#{functionId}' menuItemId='#{menuItemId}'/>, 
+       document.getElementById('content'));

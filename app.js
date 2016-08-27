@@ -15,6 +15,7 @@ var db = require('./models/db.js');
 
 var routesSystemServices = require('./routes/services/SystemService.js')
 var menuitemServices = require('./routes/services/MenuItemService.js')
+var functionServices = require('./routes/services/functionService.js')
 
 // Morgan log to log4js:
 var morganLogger = morgan("combined", {
@@ -28,7 +29,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ^v ADD NEW ROUTER FILES HERE ^v
-app.use('/', routesIndex, routesSystemMenu, routesSystemServices, menuitemServices, routesAdmin)
+app.use('/', 	routesIndex, routesSystemMenu, 
+							routesSystemServices, menuitemServices, 
+							functionServices, routesAdmin)
 
 //view engine setup (JADE)
 app.set('views', path.join(__dirname, 'views'));
