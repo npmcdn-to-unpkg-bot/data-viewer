@@ -7,15 +7,6 @@ var systemService = require.main.require('./src/fi/pilvikoodari/dataviewer/servi
 
 var ObjectId = require('mongoose').Types.ObjectId; 
 
-var config = require.main.require('./config.json');
-
-var options = {
-		  server: { poolSize: 1 },
-		  server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
-		  replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } },
-		  ssl: 'true'
-		}
-
 /* GET All Systems */
 router.get('/systemService', function(req, res, next) {
 	systemService.getAllSystems(function(err, systems) {
