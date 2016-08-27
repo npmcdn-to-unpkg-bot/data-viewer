@@ -17,6 +17,8 @@ html
   body
    div(id="content" class="container-floating")
    script(type="text/babel").
+    // SYSTEM DATA
+    var SystemData = React.createClass({displayName: 'SystemData',    
     
     showError : function(errorTextToAdd) {this.setState({errorText : errorTextToAdd});},
 
@@ -202,11 +204,11 @@ html
 
                       <div id={'info_'+this.props.item._id} className = "infoBox" style={{display: 'none' }}>
                         id = {this.props.item._id}<br/>
-                        Text = {this.props.item.text}<br/>
                         Identation = {this.props.item.identation}<br/>
+                        Text = {this.props.item.text}<br/>
+                        Functions = {this.props.item.functions.length}<br/>
                       </div>
                     </div>
-
                 </div>
             );
         }
@@ -301,4 +303,5 @@ html
     });
 
     ReactDOM.render(
+        <SystemData id='#{systemId}'/>, 
         document.getElementById('content'));

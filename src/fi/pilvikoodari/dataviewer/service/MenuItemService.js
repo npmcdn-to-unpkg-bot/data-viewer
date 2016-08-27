@@ -81,7 +81,27 @@ module.exports = {
                 callback(reason);
             }
         ) // Promise
-    } // deleteMenuItem
+    }, // deleteMenuItem
+
+    updateMenuItem : function updateMenuItem(id, newdata, callback) {
+        MenuItemDTO.findOne({"_id" : id}, function (err, loaded) {
+            if(!err) {
+                var item = loaded.toObject();
+                for (var property in item) {
+                   if (item.hasOwnProperty(property)) {
+                       if(newdata.hasOwnProperty(property)) {
+                           loaded[property]=newdata[property];
+                       }
+                    }
+                }
+                loaded.save();
+                callback(err, loaded);
+            } else {
+                logger.error(err);
+                callback(err);
+            }
+	    });
+    }
 }
 
 function sortMenuItems(menuItemsUnsorted, sorted) {

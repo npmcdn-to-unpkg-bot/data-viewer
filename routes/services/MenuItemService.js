@@ -24,6 +24,23 @@ router.delete('/menuItemService/:menuItemId', function(req, res, next) {
 	})
 });
 
+/* GET One menuitem */
+router.get('/menuItemService/item/:id', function(req, res, next) {
+	menuItemService.getMenuItemWithFunctions(req.params.id, function (err, menuItem) {
+		res.end(JSON.stringify(menuItem));
+	});
+});
 
+/* PUT One menuitem */
+router.put('/menuItemService/item/:id', function(req, res, next) {
+	menuItemService.updateMenuItem(req.params.id, req.body, function (err, menuItem) {
+		if(err) {
+			res.status(500).send({ error: "Update failed." });
+		} else {
+			res.send({success : true});
+			res.end();
+		};
+	});
+});
 
 module.exports = router;
