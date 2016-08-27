@@ -11,6 +11,19 @@ router.get('/menuItemService/:systemId', function(req, res, next) {
 	})
 });
 
+/* DELETE one menuitem */
+router.delete('/menuItemService/:menuItemId', function(req, res, next) {
+	console.log("PARAM="+req.params.menuItemId);
+	menuItemService.deleteMenuItem(req.params.menuItemId, function(err) {
+		if(err) {
+			res.status(500).send({ error: "Delete failed." });
+		} else {
+			res.send({success : true});
+			res.end();
+		}
+	})
+});
+
 
 
 module.exports = router;

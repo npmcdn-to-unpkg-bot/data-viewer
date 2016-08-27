@@ -11,54 +11,47 @@ html
    script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
    meta(charset="utf-8")
    meta(name="viewport" content="width=device-width, initial-scale=1")
-   script.
-    function showSystemInfo(systemid, systemname) {
-        alert(systemname);
-    }   
 
   title Palvelun ylläpito
   link(rel='stylesheet', href='/stylesheets/style.css')
   body
    div(id="content" class="container-floating")
    script(type="text/babel").
-    // SYSTEM INFO BOX
-    var SystemBasicData = React.createClass({displayName: 'SystemBasicData',
-        showError : function(errorTextToAdd) {
-            this.setState({errorText : errorTextToAdd});
-        },
+    
+    showError : function(errorTextToAdd) {this.setState({errorText : errorTextToAdd});},
 
-        showMessage : function(msg) {
-            this.setState({messageText: msg});
-            $(".messageText").show();
-        },
+    showMessage : function(msg) {this.setState({messageText: msg});
+        $(".messageText").show();
+    },
 
-        loadSystem : function(id) {
-            $.ajax({
-                url : '/systemService/' + id,
-                dataType: 'json',
-                cache: false,
-                timeout: 15000,
+    loadSystem : function(id) {
+        $.ajax({
+        url : '/systemService/' + id,
+        dataType: 'json',
+        cache: false,
+        timeout: 15000,
+        success: function(data) {
+            this.setState({name : data.name,
+                            title : data.title,
+                            notes : data.notes})
+        }.bind(this),
 
-                success: function(data) {
-                    this.setState({name : data.name,
-                                 title : data.title,
-                                 notes : data.notes})
-                }.bind(this),
+        error: function(xhr, status, err) {
+            this.showError('Tietosisällön haku epäonnistui.');
+        }.bind(this)
+        
+      });//ajax             
+    }, // loadSystem
 
-                error: function(xhr, status, err) {
-                    this.showError('Tietosisällön haku epäonnistui.');
-                }.bind(this)
-            });//ajax             
-        }, // loadSystem
 
-        getInitialState: function() {
-            return {
-                name: '',
-                title: '',
-                notes: '',
-                errorText : ' ',
-                messageText : ' '
-                 };
+    getInitialState: function() {
+        return {
+            name: '',
+            title: '',
+            notes: '',
+            errorText : ' ',
+            messageText : ' '
+                };
         },
 
         componentDidMount: function() {
@@ -107,8 +100,12 @@ html
                   <div className="errorText">{this.state.errorText}</div>
                   <div className="messageText">{this.state.messageText}</div>
                   <div className="menuItem"> <a href="/admin/systems"> &lt;&lt; takaisin</a></div>
-
                   <form className="basicDataForm">
+                    <div className="row">
+                      <div className="col-sm-12 dataTitle">
+                      PALVELUN PERUSTIEDOT
+                      </div>
+                    </div>
                     <div className="row">
                         <div className="col-sm-3 dataHeader">
                         Nimi
@@ -158,18 +155,150 @@ html
                         &nbsp;
                       </div>
                       <div className="col-sm-6 dataEdit" >
-                        <button id="savebasicdata" type="button" className="btn btn-primary btn-sm" onClick={this.saveBasicData}>Tallenna</button>
+                        <button id="savebasicdata" type="button" className="btn btn-primary btn-sm" onClick={this.saveBasicData}>Tallenna perustiedot</button>
                       </div>
                     </div>
                   </form>
+                  <MenuItemList systemid={this.props.id} />
                   <div className="menuItem"> <a href="/admin/systems"> &lt;&lt; takaisin</a></div>
                   </div>
             );
         }
     });
 
+    // MENU ITEM
+    var MenuItem = React.createClass({displayName: 'MenuItem',
+
+        showInfo : function(itemToShow) {
+            $('#info_'+itemToShow._id).toggle();
+        },
+
+        redirectToMenuItemEdit : function(itemToEdit) {
+            window.location.href='/admin/menuitem/' + itemToEdit._id;    
+        },
+
+        deleteMenuItem : function(itemToDelete) {
+            this.props.onDeleteMenuItem(itemToDelete);
+        },
+
+        render : function() {
+            var identations = '';
+            for(var j=0;j<this.props.item.identation;j++)
+                identations += '\u00a0\u00a0\u00a0\u00a0';
+
+            return (
+                <div className="row">
+                    <div className="col-sm-6 menuItem">
+                        {identations + this.props.item.text}
+                    </div>
+                    <div className="col-sm-6 menuItem">
+                      <button id="menuiteminfo" type="button" className="btn btn-info btn-sm" onClick={this.showInfo.bind(this, this.props.item) }>Tiedot</button>
+                      &nbsp;
+                      <button id="editmenuitem" type="button" className="btn btn-primary btn-sm" onClick={this.redirectToMenuItemEdit.bind(this, this.props.item) }>Muokkaa</button>
+                      &nbsp;
+                      <button id="deletemenuitem" type="button" className="btn btn-danger btn-sm" onClick={this.deleteMenuItem.bind(this, this.props.item) }>Poista</button>
+                      &nbsp;
+                      <br/>
+
+                      <div id={'info_'+this.props.item._id} className = "infoBox" style={{display: 'none' }}>
+                        id = {this.props.item._id}<br/>
+                        Text = {this.props.item.text}<br/>
+                        Identation = {this.props.item.identation}<br/>
+                      </div>
+                    </div>
+
+                </div>
+            );
+        }
+    });
+
+    // MENUITEM LIST
+    var MenuItemList = React.createClass({displayName: 'MenuItemList',
+
+    showError : function(errorTextToAdd) {
+        this.setState({errorText : errorTextToAdd});
+    },
+
+    showMessage : function(msg) {
+            this.setState({messageText: msg});
+            $(".messageText").show();
+    },
+
+        loadMenuItems : function(systemid) {
+            $.ajax({
+                url : '/menuItemService/' + systemid,
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,
+
+                success: function(data) {
+                    this.setState({items : data})
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Tietosisällön haku epäonnistui.');
+                }.bind(this)
+            });//ajax             
+        }, // loadMenuItems
+
+        getInitialState: function() {
+            return {
+                items: [],
+                messageText : '',
+                errorText : ''
+                };
+        },
+
+    componentDidMount: function() {
+        this.loadMenuItems(this.props.systemid);
+    },
+
+    onDeleteMenuItem : function(menuItemToDelete) {
+        if(confirm('VAROITUS!\nPoistetaanko valikon osa \"' + menuItemToDelete.text + '\"?\n' +
+        'Samalla poistetaan kaikki valikon osan toiminnot.')) {
+             $.ajax({
+                url : ("/menuItemService/" + menuItemToDelete._id),
+                type : 'DELETE',
+                dataType: 'json',
+                cache: false,
+                timeout: 15000,                
+                
+                success: function(data) {
+                    this.showMessage('Tiedot poistettu.');
+                    this.loadMenuItems(this.props.systemid);
+                }.bind(this),
+
+                error: function(xhr, status, err) {
+                    this.showError('Poisto  epäonnistui.');
+                }.bind(this)
+
+            });//ajax
+
+        }
+    },
+
+    render : function() {
+        var items = this.state.items.map(function(item) {
+            return (
+            <MenuItem key={item._id} item={item} onDeleteMenuItem={this.onDeleteMenuItem} />
+            );
+        }, this);
+        return (
+            <div>
+                <div className="row">
+                    <div className="col-sm-12 dataTitle">
+                    PALVELUN VALIKKO
+                    </div>
+                <div className="errorText">{this.state.errorText}</div>
+                <div className="messageText">{this.state.messageText}</div>
+                </div>
+                <div className="meuItemList">
+                    {items}
+                </div>
+            </div>
+        );
+        }
+    });
+
     ReactDOM.render(
-    <SystemBasicData id='#{systemId}'/>, document.getElementById('content')
-    );
-
-
+        document.getElementById('content'));

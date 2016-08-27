@@ -39,9 +39,17 @@ a {
   padding: 10px;
 }
 
+.dataTitle {
+  color: darkblue;
+  background-color : #D7E2EE;
+  font: 18px Helvetica, Arial, sans-serif;
+  margin: 10px;
+}
+
+
 
 .dataHeader {
-  color: #9999FF;
+  color: #5555FF;
   background-color : #D7E2EE;
   font: 18px Helvetica, Arial, sans-serif;
   margin: 10px;

@@ -93,7 +93,6 @@ module.exports = {
                             }
                         });      
                     } else {
-                        logger.info("MI POISTO FAIL");
                         logger.error(err);
                         callback(err);
                     }

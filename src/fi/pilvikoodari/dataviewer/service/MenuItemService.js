@@ -1,8 +1,9 @@
 var logger = require('log4js').getLogger();
 
 var MenuItemDTO = require.main.require("./models/MenuItem.js");
-var ObjectId = require('mongoose').Types.ObjectId; 
+var FunctionDTO = require.main.require("./models/Function.js");
 
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 module.exports = { 
 
@@ -47,7 +48,40 @@ module.exports = {
                 callback(err);
             }
         });
-    }
+    },
+
+    deleteMenuItem : function deleteMenuItem(menuItemId, callback) {
+        new Promise(function(resolve, reject) {
+        // STEP1: delete menuitem functions:
+        console.log("deleting item functions: " + menuItemId);
+            FunctionDTO.find({menuitemid : ObjectId(menuItemId)}).remove(function (err) {
+                if(!err) 
+                    resolve();
+                else
+                    reject(err);
+            });    
+        }).then (
+            function functionDeletedSuccesfully() {
+                console.log("deleting menuitem itself");
+                // STEP2: delete menu item itself
+                MenuItemDTO.findByIdAndRemove(menuItemId, function(err) {
+                    if(err) {
+                        logger.error(err);
+                        callback(err);
+                    } else {
+                        callback();
+                    }
+                });
+            },
+
+            // FUNCTIOS DELETE FAILED:
+            reason => {
+                logger.error(reason);
+                logger.error(reason,message);
+                callback(reason);
+            }
+        ) // Promise
+    } // deleteMenuItem
 }
 
 function sortMenuItems(menuItemsUnsorted, sorted) {
@@ -81,5 +115,5 @@ function addRootAndChilds(rootItem, allItems, sorted, identation) {
         for(var j=0;j<childs.length;j++) {
         addRootAndChilds(childs[j], allItems, sorted, identation+1);
         }
-    } 
+    }
 }

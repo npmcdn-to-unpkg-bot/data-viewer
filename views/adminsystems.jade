@@ -11,10 +11,6 @@ html
    script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
    meta(charset="utf-8")
    meta(name="viewport" content="width=device-width, initial-scale=1")
-   script.
-    function showSystemInfo(systemid, systemname) {
-        alert(systemname);
-    }   
 
   title Palveluiden ylläpito
   link(rel='stylesheet', href='/stylesheets/style.css')
@@ -61,7 +57,7 @@ html
 
         deleteSystem : function(systemToDelete) {
             if(confirm('VAROITUS!\nPoistetaanko palvelu ' + systemToDelete.name + ' kokonaan?' +
-            ' Samalla poistetaan kaikki palvelun valikot ja toiminnot.')) {
+            '\nSamalla poistetaan kaikki palvelun valikot ja toiminnot.')) {
                 this.props.onDeleteSystem(systemToDelete._id);
             }
         }
