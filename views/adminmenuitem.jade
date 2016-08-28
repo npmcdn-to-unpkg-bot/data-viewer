@@ -54,7 +54,8 @@ html
     },
 
     componentDidMount: function() {
-        this.loadMenuItem(this.props.menuItemId);
+        if(this.props.menuItemId!='')
+            this.loadMenuItem(this.props.menuItemId);
     },
 
     handleTextChange : function(e) {
@@ -62,22 +63,40 @@ html
     },
 
     saveBasicData : function(e) {
+        if(this.state.menuitemtext.length < 1) {
+            this.showError('Teksti on pakollinen tieto.');
+            return;
+        }
+        this.showError('');
+        this.showMessage('');
+
+        var reqUrl = '/menuItemService/' + this.props.menuItemId;
+        var reqType = 'PUT';
+        if(this.props.menuItemId=='') {
+            reqUrl = '/menuItemService/';
+            reqType = 'POST';
+        }
+
         $.ajax({
-            url : '/menuItemService/item/' + this.props.menuItemId,
-            type: "PUT",
+            url : reqUrl,
+            type: reqType,
             dataType: 'json',
             cache: false,
             timeout: 15000,
             data: {
-                text: this.state.menuitemtext},
+                text: this.state.menuitemtext,
+                systemId: this.props.systemId,
+                parentItemId : this.props.parentId
+                },
 
             success: function(data) {
-                this.showMessage('Tiedot päivitetty.');
-                this.loadMenuItem(this.props.menuItemId);
+                this.showMessage('Tiedot tallennettu.');
+                if(this.props.menuItemId=='')
+                    document.location='/admin/menuitem/'+data._id;
             }.bind(this),
 
             error: function(xhr, status, err) {
-                this.showError('Päivitys epäonnistui.');
+                this.showError('Tallennus epäonnistui.');
             }.bind(this)
 
         });//ajax
@@ -211,8 +230,8 @@ html
         },
 
     componentDidMount: function() {
-        console.log("SYSID:" + this.props.systemId);
-        this.loadFunctions(this.props.menuItemId);
+        if(this.props.menuItemId!='')
+            this.loadFunctions(this.props.menuItemId);
     },
 
     onDeleteFunction : function(functionToDelete) {
@@ -262,6 +281,6 @@ html
     }); // functionsList
 
     ReactDOM.render(
-        <MenuItemData menuItemId='#{menuItemId}'systemId='#{systemId}' />, 
+        <MenuItemData menuItemId='#{menuItemId}'systemId='#{systemId}' parentId='#{parentId}' />, 
         document.getElementById('content'));
 
