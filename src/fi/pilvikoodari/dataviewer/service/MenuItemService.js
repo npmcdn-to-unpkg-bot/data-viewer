@@ -113,7 +113,6 @@ function sortMenuItems(menuItemsUnsorted, sorted) {
     }
     if(rootItems.length>0) {
         for(var k=0;k<rootItems.length;k++) {
-            console.log("HANDLE ROOT:" + rootItems[k]);
             addRootAndChilds(rootItems[k], menuItemsUnsorted, sorted, 0);
         }
     }
