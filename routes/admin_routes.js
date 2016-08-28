@@ -20,6 +20,11 @@ router.get('/admin/system/:systemId', function(req, res, next) {
   res.render('adminsystem', { systemId: req.params.systemId });
 });
 
+// GET admin page for NEW system
+router.get('/admin/system/', function(req, res, next) {
+  res.render('adminsystem', { systemId: '' });
+});
+
 // GET admin page for one menuitem
 router.get('/admin/menuitem/:menuItemId', function(req, res, next) {
   menuItemService.getMenuItemWithFunctions(req.params.menuItemId, function(err, item) {
@@ -29,6 +34,11 @@ router.get('/admin/menuitem/:menuItemId', function(req, res, next) {
       res.render('adminmenuitem', { menuItemId: req.params.menuItemId,  systemId: item.toObject().systemId} );
     }
   })
+});
+
+// GET admin page for NEW menuitem
+router.get('/admin/menuitem/', function(req, res, next) {
+  res.render('adminmenuitem', { menuItemId: '' });
 });
 
 // GET admin page for one function
@@ -42,6 +52,13 @@ router.get('/admin/function/:functionId', function(req, res, next) {
         menuItemId: func.menuitemid });
     }
   });  
+});
+
+
+// GET admin page for NEW function
+router.get('/admin/function/', function(req, res, next) {
+      res.render('adminfunction', { functionId: '',
+        menuItemId: '' });
 });
 
 

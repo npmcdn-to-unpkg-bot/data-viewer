@@ -38,7 +38,7 @@ module.exports = {
 
     updateSystem : function updateSystem(id, newdata, callback) {
         SystemDTO.findOne({"_id" : id}, function (err, systemInfo) {
-            if(!err) {
+            if(!err && systemInfo!=null) {
                 var sys = systemInfo.toObject();
                 for (var property in sys) {
                    if (sys.hasOwnProperty(property)) {
@@ -54,6 +54,17 @@ module.exports = {
                 callback(err);
             }
 	    });
+    },
+
+    saveSystem : function saveSystem(id, newdata, callback) {
+        var sys = new SystemDTO(newdata);
+        //sys._id = new ObjectId();
+        sys.save(function(err) {
+            if(err) {
+                logger.error(err);
+            }
+            callback(err, sys);
+        });
     },
 
     removeSystem : function removeSystem(systemId, callback) {

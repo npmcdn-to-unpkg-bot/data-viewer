@@ -57,7 +57,8 @@ html
         },
 
         componentDidMount: function() {
-            this.loadSystem(this.props.id);
+            if(this.props.id!='')
+                this.loadSystem(this.props.id);
         },
 
         handleNameChange : function(e) {
@@ -73,9 +74,20 @@ html
         },
 
         saveBasicData : function(e) {
+            this.showError('');
+            if(this.state.name.length<1) {
+                this.showError('Nimi ei voi olla tyhjä');
+                return;
+            }
+            var reqUrl = '/systemService/' + this.props.id;
+            var reqType = 'PUT';
+            if(this.props.id=='') {
+                reqUrl = '/systemService/';
+                reqType = 'POST';
+            }
              $.ajax({
-                url : '/systemService/' + this.props.id,
-                type: "PUT",
+                url : reqUrl,
+                type: reqType,
                 dataType: 'json',
                 cache: false,
                 timeout: 15000,
@@ -90,7 +102,7 @@ html
                 }.bind(this),
 
                 error: function(xhr, status, err) {
-                    this.showError('Päivitys epäonnistui.');
+                    this.showError('Päivitys epäonnistui.' + err + status + xhr.toString());
                 }.bind(this)
             });//ajax             
         },
@@ -147,6 +159,7 @@ html
                                     name="Kuvaus"
                                     className="inputTextArea"
                                     value={this.state.notes}
+                                    placeholder="Kuvaus palvelusta"
                                     onChange={this.handleNotesChange}
                                  />
 
@@ -226,33 +239,34 @@ html
             $(".messageText").show();
     },
 
-        loadMenuItems : function(systemid) {
-            $.ajax({
-                url : '/menuItemService/' + systemid,
-                dataType: 'json',
-                cache: false,
-                timeout: 15000,
+    loadMenuItems : function(systemid) {
+        $.ajax({
+            url : '/menuItemService/' + systemid,
+            dataType: 'json',
+            cache: false,
+            timeout: 15000,
 
-                success: function(data) {
-                    this.setState({items : data})
-                }.bind(this),
+            success: function(data) {
+                this.setState({items : data})
+            }.bind(this),
 
-                error: function(xhr, status, err) {
-                    this.showError('Tietosisällön haku epäonnistui.');
-                }.bind(this)
-            });//ajax             
-        }, // loadMenuItems
+            error: function(xhr, status, err) {
+                this.showError('Tietosisällön haku epäonnistui.');
+            }.bind(this)
+        });//ajax             
+    }, // loadMenuItems
 
-        getInitialState: function() {
-            return {
-                items: [],
-                messageText : '',
-                errorText : ''
-                };
-        },
+    getInitialState: function() {
+        return {
+            items: [],
+            messageText : '',
+            errorText : ''
+            };
+    },
 
     componentDidMount: function() {
-        this.loadMenuItems(this.props.systemid);
+        if(this.props.systemid!='')
+            this.loadMenuItems(this.props.systemid);
     },
 
     onDeleteMenuItem : function(menuItemToDelete) {
@@ -289,7 +303,7 @@ html
             <div>
                 <div className="row">
                     <div className="col-sm-12 dataTitle">
-                    PALVELUN VALIKKO
+                        { this.props.systemid=='' ? '' : 'PALVELUN VALIKKO'}
                     </div>
                 <div className="errorText">{this.state.errorText}</div>
                 <div className="messageText">{this.state.messageText}</div>

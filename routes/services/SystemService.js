@@ -28,10 +28,22 @@ router.put('/systemService/:id', function(req, res, next) {
 	});
 });
 
+/* POST One NEW system */
+router.post('/systemService', function(req, res, next) {
+	systemService.saveSystem(req.params.id, req.body, function (err, systemInfo) {
+		if(err) {
+			logger.error(err);
+			res.status(500).send({ error: "Save failed." });
+		}
+		res.end(JSON.stringify(systemInfo));
+	});
+});
+
 /* DELETE One system */
 router.delete('/systemService/:id', function(req, res, next) {
 	systemService.removeSystem(req.params.id, function (err) {
 		if(err) {
+			logger.error(err);
 			res.status(500).send({ error: "Delete failed." });
 		} else {
 			res.send({success : true});
