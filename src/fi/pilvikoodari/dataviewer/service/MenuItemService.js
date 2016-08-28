@@ -102,7 +102,6 @@ module.exports = {
     },
 
     saveMenuItem : function saveMenuItem(newdata, callback) {
-        console.log('Parent:'+newdata.parentItemId);
         var item = new MenuItemDTO(newdata);
         item.systemId = new ObjectId(newdata.systemId);
         if(newdata.parentItemId!='')
