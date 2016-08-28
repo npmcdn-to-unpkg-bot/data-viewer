@@ -13,7 +13,6 @@ router.get('/menuItemService/:systemId', function(req, res, next) {
 
 /* DELETE one menuitem */
 router.delete('/menuItemService/:menuItemId', function(req, res, next) {
-	console.log("PARAM="+req.params.menuItemId);
 	menuItemService.deleteMenuItem(req.params.menuItemId, function(err) {
 		if(err) {
 			res.status(500).send({ error: "Delete failed." });
@@ -32,12 +31,25 @@ router.get('/menuItemService/item/:id', function(req, res, next) {
 });
 
 /* PUT One menuitem */
-router.put('/menuItemService/item/:id', function(req, res, next) {
+router.put('/menuItemService/:id', function(req, res, next) {
 	menuItemService.updateMenuItem(req.params.id, req.body, function (err, menuItem) {
 		if(err) {
 			res.status(500).send({ error: "Update failed." });
 		} else {
 			res.send({success : true});
+			res.end();
+		};
+	});
+});
+
+/* POST One NEW menuitem */
+router.post('/menuItemService/', function(req, res, next) {
+	menuItemService.saveMenuItem(req.body, function (err, menuItem) {
+		if(err) {
+			logger.error(err);
+			res.status(500).send({ error: "Save failed." });
+		} else {
+			res.send(JSON.stringify(menuItem));
 			res.end();
 		};
 	});

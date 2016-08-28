@@ -53,7 +53,6 @@ module.exports = {
     deleteMenuItem : function deleteMenuItem(menuItemId, callback) {
         new Promise(function(resolve, reject) {
         // STEP1: delete menuitem functions:
-        console.log("deleting item functions: " + menuItemId);
             FunctionDTO.find({menuitemid : ObjectId(menuItemId)}).remove(function (err) {
                 if(!err) 
                     resolve();
@@ -62,7 +61,6 @@ module.exports = {
             });    
         }).then (
             function functionDeletedSuccesfully() {
-                console.log("deleting menuitem itself");
                 // STEP2: delete menu item itself
                 MenuItemDTO.findByIdAndRemove(menuItemId, function(err) {
                     if(err) {
@@ -101,6 +99,23 @@ module.exports = {
                 callback(err);
             }
 	    });
+    },
+
+    saveMenuItem : function saveMenuItem(newdata, callback) {
+        console.log('Parent:'+newdata.parentItemId);
+        var item = new MenuItemDTO(newdata);
+        item.systemId = new ObjectId(newdata.systemId);
+        if(newdata.parentItemId!='')
+            item.parentItemId = new ObjectId(newdata.parentItemId);
+        else
+            item.parentItemId = null;
+        item._id = new ObjectId();
+        item.save(function(err) {
+            if(err) {
+                logger.error(err);
+            }
+            callback(err, item);
+        });
     }
 }
 

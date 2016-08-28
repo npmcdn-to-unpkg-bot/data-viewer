@@ -29,17 +29,23 @@ router.get('/admin/system/', function(req, res, next) {
 router.get('/admin/menuitem/:menuItemId', function(req, res, next) {
   menuItemService.getMenuItemWithFunctions(req.params.menuItemId, function(err, item) {
     if(err) {
-      res.render('adminmenuitem', { menuItemId: req.params.menuItemId, systemId : '' });
+      res.render('adminmenuitem', { menuItemId: req.params.menuItemId, systemId : '', parentId : '' });
     } else {
-      res.render('adminmenuitem', { menuItemId: req.params.menuItemId,  systemId: item.toObject().systemId} );
+      res.render('adminmenuitem', { menuItemId: req.params.menuItemId,  systemId: item.toObject().systemId, parentId: item.toObject().parentItemId} );
     }
   })
 });
 
-// GET admin page for NEW menuitem
-router.get('/admin/menuitem/', function(req, res, next) {
-  res.render('adminmenuitem', { menuItemId: '' });
+// GET admin page for NEW menuitem with parent
+router.get('/admin/add/menuitem/:systemId/parent/:parentId', function(req, res, next) {
+  res.render('adminmenuitem', { systemId : req.params.systemId, parentId : req.params.parentId });
 });
+
+// GET admin page for NEW menuitem (root)
+router.get('/admin/add/menuitem/:systemId', function(req, res, next) {
+  res.render('adminmenuitem', { systemId: req.params.systemId, parentId : '' });
+});
+
 
 // GET admin page for one function
 router.get('/admin/function/:functionId', function(req, res, next) {
