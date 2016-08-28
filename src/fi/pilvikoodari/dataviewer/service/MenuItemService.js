@@ -106,13 +106,17 @@ module.exports = {
 
 function sortMenuItems(menuItemsUnsorted, sorted) {
     // Find root first:
-    var rootItem;
+    var rootItems = [];
     for(var r=0;r<menuItemsUnsorted.length;r++) {
         if(!menuItemsUnsorted[r].parentItemId)
-            rootItem = menuItemsUnsorted[r];
+            rootItems.push(menuItemsUnsorted[r]);
     }
-    if(rootItem)
-        addRootAndChilds(rootItem, menuItemsUnsorted, sorted, 0);
+    if(rootItems.length>0) {
+        for(var k=0;k<rootItems.length;k++) {
+            console.log("HANDLE ROOT:" + rootItems[k]);
+            addRootAndChilds(rootItems[k], menuItemsUnsorted, sorted, 0);
+        }
+    }
 }
 
 function addRootAndChilds(rootItem, allItems, sorted, identation) {
