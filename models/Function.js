@@ -6,6 +6,7 @@ var functionSchema = new Schema({
 	ordernumber : Number,
     moduleid : String,
 	moduleparameters: {
+        text : String,
         cameraid : String,
         presetid : String,
         roadstationid : String,
@@ -14,7 +15,8 @@ var functionSchema = new Schema({
 });
 
 functionSchema.methods.hasParameters = function() {
-    if(this.moduleparameters.cameraid==null && 
+    if(this.moduleparameters.text==null &&
+        this.moduleparameters.cameraid==null && 
         this.moduleparameters.presetid==null &&
         this.moduleparameters.roadstationid==null && 
         this.moduleparameters.LAM==null)
