@@ -35,7 +35,7 @@ html
         
         element = document.createElement('p');
         element.className='simpleTextModule'
-        element.innerHTML = data.text;
+        element.innerText = data.text;
         col1_row1.appendChild(element);
         row1.appendChild(col1_row1);
         $(".appendhere").append(row1);
@@ -54,7 +54,7 @@ html
       var row1 = document.createElement('div');
       row1.className = "row";
       var col1_row1 = document.createElement('div');
-      col1_row1.className="col-sm-12 lamHeader";
+      col1_row1.className="col-sm-12";
       imagelement = document.createElement('img');
       imagelement.src = img.src;
       col1_row1.appendChild(imagelement);
