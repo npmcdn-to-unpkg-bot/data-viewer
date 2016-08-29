@@ -62,9 +62,9 @@ router.get('/admin/function/:functionId', function(req, res, next) {
 
 
 // GET admin page for NEW function
-router.get('/admin/function/', function(req, res, next) {
+router.get('/admin/add/function/:menuItemId', function(req, res, next) {
       res.render('adminfunction', { functionId: '',
-        menuItemId: '' });
+        menuItemId: req.params.menuItemId });
 });
 
 

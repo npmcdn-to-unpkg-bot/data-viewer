@@ -256,6 +256,10 @@ html
         } // onDeleteFunction
     },
 
+    addNewFunction : function(func) {
+        document.location = '/admin/add/function/' + this.props.menuItemId;
+    },
+
     render : function() {
         var functions = this.state.functions.map(function(func) {
             return (
@@ -274,6 +278,8 @@ html
                 <div className="functions">
                     {functions}
                 </div>
+                <button id="addNewFunction" type="button" className="btn btn-primary btn-sm" onClick={this.addNewFunction}>Lisää uusi toiminto</button>
+                <br/>
                 <div className="menuItem"> <a href={"/admin/system/" + this.props.systemId}> &lt;&lt; takaisin</a></div>
             </div>
         );

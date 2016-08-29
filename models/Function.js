@@ -10,9 +10,17 @@ var functionSchema = new Schema({
         presetid : String,
         roadstationid : String,
         LAM : String
-        },
-    menuitem : [{ type: Schema.Types.ObjectId, ref: 'menuitems' }]
+        }
 });
+
+functionSchema.methods.hasParameters = function() {
+    if(this.moduleparameters.cameraid==null && 
+        this.moduleparameters.presetid==null &&
+        this.moduleparameters.roadstationid==null && 
+        this.moduleparameters.LAM==null)
+        return false;
+    return true;
+}
 
 var FunctionDTO = mongoose.model('functions', functionSchema);
 

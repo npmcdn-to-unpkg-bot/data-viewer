@@ -35,9 +35,13 @@ html
         cache: false,
         timeout: 15000,
         success: function(data) {
+            var params = JSON.stringify(data.moduleparameters, null, 2);
+            if(params==null) {
+                params = '{ }';
+            }
             this.setState({ordernumber : data.ordernumber,
                             moduleid : data.moduleid,
-                            moduleparameters : JSON.stringify(data.moduleparameters, null, 2)})
+                            moduleparameters : params })
         }.bind(this),
 
         error: function(xhr, status, err) {
@@ -49,7 +53,7 @@ html
 
     getInitialState: function() {
         return {
-            ordernumber: 0,
+            ordernumber: 1,
             moduleid: '',
             moduleparameters: '',
             errorText : ' ',
@@ -58,7 +62,8 @@ html
     },
 
     componentDidMount: function() {
-        this.loadFunction(this.props.id);
+        if(this.props.id!='')
+            this.loadFunction(this.props.id);
     },
 
     handleOrderChange : function(e) {
@@ -74,24 +79,47 @@ html
     },
 
     saveData : function(e) {
+        
+        if(this.state.ordernumber.length < 1 ||
+            this.state.moduleid.length < 1 ||
+            this.state.moduleparameters.length < 1 
+        ) {
+            this.showError('Kaikki kentät ovat pakollisia.');
+            return;
+        }
+
+        this.showError('');
+        this.showMessage('');
+
+        var reqUrl = '/functionService/' + this.props.id;
+        var reqType = 'PUT';
+        if(this.props.id=='') {
+            reqUrl = '/functionService/';
+            reqType = 'POST';
+        }
         $.ajax({
-            url : '/functionService/' + this.props.id,
-            type: "PUT",
+            url : reqUrl,
+            type: reqType,
             dataType: 'json',
             cache: false,
             timeout: 15000,
             data: {
                 ordernumber: this.state.ordernumber,
                 moduleid: this.state.moduleid,
-                moduleparameters: this.state.moduleparameters},
+                moduleparameters: this.state.moduleparameters,
+                menuitemid : this.props.menuItemId
+                },
 
             success: function(data) {
-                this.showMessage('Tiedot päivitetty.');
-                this.loadFunction(this.props.id);
+                this.showMessage('Tiedot tallennettu.');
+                if(this.props.id=='')
+                    document.location='/admin/function/'+data._id;
+                else
+                    this.loadFunction(this.props.id);
             }.bind(this),
 
             error: function(xhr, status, err) {
-                this.showError('Päivitys epäonnistui.');
+                this.showError('Tallennus epäonnistui. ' + xhr.responseText);
             }.bind(this)
         });//ajax             
     }, // saveData
