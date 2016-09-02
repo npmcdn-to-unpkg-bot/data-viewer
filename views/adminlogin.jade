@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+   script(src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js")
+   link(rel="stylesheet", href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+   script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+   link(rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
+   meta(charset="utf-8")
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+   script.
+    $(document).ready(function() { 
+        $("#username").focus();      
+        var message = '#{message}';
+        if(message.length>0) {
+            $("#alertDiv").toggle();
+        }
+    })
+
+  title Login
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+   div.container-floating
+    div.row
+     div(class="col-sm-6 col-sm-offset-3")
+      h1
+       span(class="fa fa-sign-in")  Kirjaudu 
+      div(id="alertDiv" class="alert alert-danger" style="display:none") #{message}
+
+      form(action="/login" method="post")
+       div.form-group
+        div Käyttäjätunnus:
+        input(type="text" class="form-control" name="username" id="username")
+       div.form-group
+        div Salasana:
+        input(type="password" class="form-control" name="password")
+       button(type="submit" class="btn btn-warning btn-lg") Login
+      hr
+      p Jos sinulla ei ole tunnusta ylläpitoon, siirry järjestelmän  
+       a(href="/") pääsivulle
+
