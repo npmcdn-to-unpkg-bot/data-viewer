@@ -42,6 +42,9 @@ module.exports = {
         MenuItemDTO.findById({"_id" : ObjectId(menuItemId)}).
         populate("functions").exec(function (err, item) {
             if(!err) {
+                item.functions = item.functions.sort((a,b) => {
+                    return a.ordernumber - b.ordernumber;
+                }) ;
                 callback(err, item);
             } else {
                 logger.error(err);
