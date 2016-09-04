@@ -38,3 +38,4 @@ process.on('SIGINT', function() {
 require('./../models/System.js');
 require('./../models/MenuItem.js');
 require('./../models/Function.js');
+require('./../models/User.js');
