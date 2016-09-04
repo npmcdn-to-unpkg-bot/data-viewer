@@ -88,12 +88,16 @@ module.exports = {
                 for (var property in item) {
                    if (item.hasOwnProperty(property)) {
                        if(newdata.hasOwnProperty(property)) {
-                           loaded[property]=newdata[property];
+                           if(typeof item[property]=='object' && newdata[property]=="")
+                             loaded[property]=null;
+                           else
+                            loaded[property]=newdata[property];
                        }
                     }
                 }
-                loaded.save();
-                callback(err, loaded);
+                loaded.save(function(err, saved, num) {
+                    callback(err, saved);
+                });
             } else {
                 logger.error(err);
                 callback(err);
@@ -109,11 +113,11 @@ module.exports = {
         else
             item.parentItemId = null;
         item._id = new ObjectId();
-        item.save(function(err) {
+        item.save(function(err, saved) {
             if(err) {
                 logger.error(err);
             }
-            callback(err, item);
+            callback(err, saved);
         });
     }
 }
