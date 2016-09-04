@@ -98,7 +98,11 @@ html
 
                 success: function(data) {
                     this.showMessage('Tiedot tallennettu.');
-                    this.loadSystem(this.props.id);
+                    if(this.props.id=='') {
+                        document.location='/admin/systems/';
+                    } else {
+                        this.loadSystem(this.props.id);
+                    }
                 }.bind(this),
 
                 error: function(xhr, status, err) {
