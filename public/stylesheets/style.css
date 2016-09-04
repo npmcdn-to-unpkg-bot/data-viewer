@@ -108,3 +108,8 @@ a {
     padding: 20px;
     margin: 10px;
 }
+
+.licenseText {
+  font: 16px Helvetica, Arial, sans-serif;
+  font-style: italic;
+}
