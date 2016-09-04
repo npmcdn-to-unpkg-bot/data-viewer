@@ -99,7 +99,7 @@ html
                 success: function(data) {
                     this.showMessage('Tiedot tallennettu.');
                     if(this.props.id=='') {
-                        document.location='/admin/systems/';
+                        document.location='/admin/system/'+data._id;
                     } else {
                         this.loadSystem(this.props.id);
                     }
