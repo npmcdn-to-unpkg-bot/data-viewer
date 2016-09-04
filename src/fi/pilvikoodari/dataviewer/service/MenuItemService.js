@@ -129,6 +129,9 @@ function sortMenuItems(menuItemsUnsorted, sorted) {
         if(!menuItemsUnsorted[r].parentItemId)
             rootItems.push(menuItemsUnsorted[r]);
     }
+    rootItems = rootItems.sort(function(a,b){
+        return (a.text.localeCompare(b.text));
+    });
     if(rootItems.length>0) {
         for(var k=0;k<rootItems.length;k++) {
             addRootAndChilds(rootItems[k], menuItemsUnsorted, sorted, 0);

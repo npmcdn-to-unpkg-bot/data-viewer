@@ -62,6 +62,7 @@ html
         a = document.createElement('a');
         a.href = '/menu/open/' + menuItem._id;
         a.text = menuItem.text;
+        a.setAttribute("class", 'menuItemLink');
         br = document.createElement('br');
         $("#menuItems").append(identations).append(a).append(br); 
       } else {

@@ -257,7 +257,11 @@ html
     },
 
     addNewFunction : function(func) {
+        if(this.props.menuItemId=="") {
+            this.showError("Tallenna ensin perustiedot.");
+        } else {
         document.location = '/admin/add/function/' + this.props.menuItemId;
+        }
     },
 
     render : function() {

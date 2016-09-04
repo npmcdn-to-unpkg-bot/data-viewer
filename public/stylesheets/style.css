@@ -43,6 +43,11 @@ a {
   padding: 10px;
 }
 
+.menuItemLink {
+  font: 18px Helvetica, Arial, sans-serif;
+  padding: 10px;
+}
+
 .dataTitle {
   color: darkblue;
   background-color : #D7E2EE;
