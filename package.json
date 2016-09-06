@@ -1,6 +1,6 @@
 {
   "name": "data-viewer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "App to load and show data from web.",
   "main": "app.js",
   "scripts": {
